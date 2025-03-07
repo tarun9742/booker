@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import OtpInput from "react-otp-input";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,7 +10,7 @@ import {
 } from "../../Controllers/Auth/AuthController";
 import { Loading1 } from "../../Componentes/Loading1";
 
-export default function OtpVerify({ goBack, formData }) {
+export default function OtpVerify({ goBack, formData, recivedOtp }) {
   const [otp, setOtp] = useState("");
   const [otpVerifying, setOtpVerifying] = useState(false);
   const [otpSending, setOtpSending] = useState(false);
@@ -71,7 +71,7 @@ export default function OtpVerify({ goBack, formData }) {
     try {
       const response = await SendOtp(formData);
       if (response.status) {
-        toast.success("OTP Sent Successfully!", {
+        toast.success(`Your OTP is ${response.data[0].otp}`, {
           position: "top-center",
         });
         setOtpSending(false);
@@ -85,9 +85,15 @@ export default function OtpVerify({ goBack, formData }) {
       toast.error("Something went wrong !", {
         position: "top-center",
       });
-      setOtpSending(false); 
+      setOtpSending(false);
     }
   };
+
+  useEffect(() => {
+    toast.success(`Your OTP is ${recivedOtp}`, {
+      position: "top-center",
+    }); 
+  }, [recivedOtp]);
 
   return (
     <div
@@ -96,13 +102,13 @@ export default function OtpVerify({ goBack, formData }) {
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${bg1})`,
       }}
     >
-      <div className="relative py-3 sm:max-w-xl sm:mx-auto"> 
+      <ToastContainer />
+
+      <div className="relative py-3 sm:max-w-xl sm:mx-auto">
         <div className="relative px-4 py-10 bg-white/30 backdrop-blur-sm shadow-lg rounded-3xl sm:p-10">
           <div className="mb-4 text-center">
-            <h1 className="text-2xl font-semibold ">Enter OTP</h1>
-            <p className="text-sm mt-2 text-center">
-              OTP sent at {formData.email}
-            </p>
+            <h1 className="text-2xl font-semibold text-gray-200 mb-6">Verify OTP</h1>
+            
           </div>
           <div className="flex justify-center items-center flex-col m-auto">
             <OtpInput
@@ -141,7 +147,6 @@ export default function OtpVerify({ goBack, formData }) {
           </div>
         </div>
       </div>
-      <ToastContainer />
     </div>
   );
 }

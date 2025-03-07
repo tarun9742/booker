@@ -36,7 +36,7 @@ export default function ChangePin() {
         setTimeout(() => {
           setIsOtpSent(false);
         }, 4500);
-        toast.success("OTP Sent at Email !", {
+        toast.success(`Your OTP is ${response.data[0].otp}`, {
           position: "top-center",
         });
       }

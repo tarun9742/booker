@@ -25,6 +25,18 @@
         scrollbar-width: none;  /* Firefox */
       }
     </style> 
+
+<style>
+  input[type="tel"]::-webkit-outer-spin-button,
+  input[type="tel"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="tel"] {
+    -moz-appearance: textfield;
+  }
+</style>
 </head>
 
 <body className="no-scrollbar"> 
