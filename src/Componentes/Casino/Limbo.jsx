@@ -152,7 +152,7 @@ export default function Limbo() {
     setPlayedGames((pre) => pre + 1);
     setManualBetStart(true);
     await updateWalletBalance("deduct", amountRef.current);
-     toast.success("Bet Placed. Game start", { position: "top-center" });
+    toast.success("Bet Placed. Game start", { position: "top-center" });
     setRandomNumber(1);
     if (playedGames >= gameToWin) {
       const randomNumber = (
@@ -282,6 +282,11 @@ export default function Limbo() {
   useEffect(() => {
     playedGamesRef.current = playedGames;
   }, [playedGames]);
+
+  useEffect(() => {
+    const chance = (1 / target) * 100;
+    setWinChance(chance);
+  }, [target]);
 
   useEffect(() => {
     return () => {
@@ -576,7 +581,7 @@ export default function Limbo() {
               </div>
               <div className="w-[50%]">
                 <p className="text-sm text-gray-300 mb-1 font-medium">
-                  Win Chance
+                  Win Chance %
                 </p>
                 <input
                   value={winChance}

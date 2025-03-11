@@ -67,7 +67,7 @@ export default function GameHistory({ type, refreshHistory }) {
                   </td>
                   <td class="px-6 py-2">
                     {item.date?.split("T")[0]}{" "}
-                    {item.date?.split("T")[1].split(".")[0]} UTC
+                    {item.date?.split("T")[1].split(".")[0]}
                   </td>
                   <td class="px-6 py-2">{item.bet_type}</td>
                   

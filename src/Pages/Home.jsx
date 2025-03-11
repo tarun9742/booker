@@ -377,7 +377,7 @@ export default function Home() {
                 <FaCoins size={20} className="dark:text-black" />
 
                 <span className="flex-1 ms-3 text-left rtl:text-right dark:text-black whitespace-nowrap ">
-                  Games Original
+                  Our Games
                 </span>
                 <svg
                   className="w-3 h-3"

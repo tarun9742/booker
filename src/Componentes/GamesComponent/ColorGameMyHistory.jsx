@@ -262,7 +262,7 @@ export default function ColorGameMyHistory({
                       </div>
                       <div className="text-black dark:text-gray-800 flex px-10 justify-between">
                         <p>Time</p>
-                        <p>{item.date?.split("T")[1]}(UTC)</p>
+                        <p>{item.date?.split("T")[1]}</p>
                       </div>
                     </td>
                   </tr>

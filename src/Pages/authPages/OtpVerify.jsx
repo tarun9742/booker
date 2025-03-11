@@ -14,6 +14,7 @@ export default function OtpVerify({ goBack, formData, recivedOtp }) {
   const [otp, setOtp] = useState("");
   const [otpVerifying, setOtpVerifying] = useState(false);
   const [otpSending, setOtpSending] = useState(false);
+  const [showOtp, setShowOtp] = useState("");
 
   const handleVerifyOtp = async () => {
     setOtpVerifying(true);
@@ -71,9 +72,7 @@ export default function OtpVerify({ goBack, formData, recivedOtp }) {
     try {
       const response = await SendOtp(formData);
       if (response.status) {
-        toast.success(`Your OTP is ${response.data[0].otp}`, {
-          position: "top-center",
-        });
+        setShowOtp(response.data[0].otp);
         setOtpSending(false);
       } else {
         toast.error("Something went wrong !", {
@@ -90,9 +89,7 @@ export default function OtpVerify({ goBack, formData, recivedOtp }) {
   };
 
   useEffect(() => {
-    toast.success(`Your OTP is ${recivedOtp}`, {
-      position: "top-center",
-    }); 
+    setShowOtp(recivedOtp);
   }, [recivedOtp]);
 
   return (
@@ -106,9 +103,11 @@ export default function OtpVerify({ goBack, formData, recivedOtp }) {
 
       <div className="relative py-3 sm:max-w-xl sm:mx-auto">
         <div className="relative px-4 py-10 bg-white/30 backdrop-blur-sm shadow-lg rounded-3xl sm:p-10">
-          <div className="mb-4 text-center">
-            <h1 className="text-2xl font-semibold text-gray-200 mb-6">Verify OTP</h1>
-            
+          <div className="mb-6 text-center">
+            <h1 className="text-2xl font-semibold text-gray-200 mb-2">
+              Verify OTP
+            </h1>
+            <p className="text-sm font-semibold text-gray-200 text-italic">Your OTP is {showOtp}</p>
           </div>
           <div className="flex justify-center items-center flex-col m-auto">
             <OtpInput

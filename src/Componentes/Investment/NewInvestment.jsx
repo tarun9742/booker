@@ -142,6 +142,9 @@ export default function NewInvestment() {
   }, [amount, PlansData]);
 
   useEffect(() => {
+    if (amount) {
+      return;
+    }
     setAmount(Number(PlansData[investmentPlan - 1]?.amount_start) || 10);
   }, [investmentPlan, PlansData]);
 
